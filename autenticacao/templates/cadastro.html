@@ -33,7 +33,7 @@
                     <p class="sub-titulo">Crie sua conta</p>
                     <hr>
 
-                    <form action="{% url "cadastro" %}" method="POST">  {% csrf_token %}
+                    <form action="{% url "autenticacao:cadastro" %}" method="POST">  {% csrf_token %}
                         <span class="bold">Nome de usuário</span>
                         <input class="form-control input-form" name="usuario" type="text" placeholder="Digite seu nome...">
                         <br>
@@ -59,7 +59,7 @@
 
                     <h3 style="position: absolute; bottom: 65px; font-weight: bold">
                         Já possui uma conta?&nbsp;
-                        <a href="#" class="btn btn-outline-success">Entrar</a>
+                        <a href="{% url 'autenticacao:logar' %}" class="btn btn-outline-success">Entrar</a>
                     </h3>
                 </div>
             </div>

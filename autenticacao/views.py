@@ -33,4 +33,4 @@ def cadastro(request):
             return redirect('/auth/cadastro')
 
 def logar(request):
-    return HttpResponse('Você está na pagina de logar')
+    return render(request, 'login.html')
