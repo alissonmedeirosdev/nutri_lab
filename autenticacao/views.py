@@ -4,7 +4,8 @@ from .utils import password_is_valid
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.messages import constants
-from django.contrib import messages
+from django.contrib import messages, auth
+
 
 def cadastro(request):   
     if request.method == 'GET':
@@ -33,4 +34,15 @@ def cadastro(request):
             return redirect('/auth/cadastro')
 
 def logar(request):
-    return render(request, 'login.html')
+    if request.method == "GET":
+        return render(request, 'logar.html')
+    elif request.method == "POST":
+        username = request.POST.get('usuario')
+        senha = request.POST.get('senha')
+        usuario = auth.authenticate(username=username, password=senha)
+    if not usuario:
+        messages.add_message(request, constants.ERROR, 'Username ou senha inválidos')
+        return redirect('/auth/logar')
+    else:
+        auth.login(request, usuario)
+        return redirect('/')

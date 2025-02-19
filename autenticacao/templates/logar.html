@@ -31,7 +31,7 @@
                     <h2 class="titulo">Seja bem vindo</h2>
                     <p class="sub-titulo">Entre com sua conta</p>
                     <hr>
-                    <form action="" method="POST">{% csrf_token %}
+                    <form action="{% url 'autenticacao:logar' %}" method="POST">{% csrf_token %}
                         <span class="bold">Nome de usuário</span>
                         <input class="form-control input-form" name="usuario" type="text" placeholder="Digite seu nome...">
                         <br>
