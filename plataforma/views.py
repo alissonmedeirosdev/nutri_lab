@@ -32,4 +32,23 @@ def pacientes(request):
     if pacientes.exists():
         messages.add_message(request, constants.ERROR, 'Já existe um paciente com esse E-mail')
         return redirect('/pacientes/')
-    return HttpResponse(f"{nome}, {sexo}, {idade}, {email}, {telefone}")
+    # return HttpResponse(f"{nome}, {sexo}, {idade}, {email}, {telefone}")
+
+    try:
+        p1 = Pacientes(
+            nome=nome,
+            sexo=sexo,
+            idade=idade,
+            email=email,
+            telefone=telefone,
+            nutri=request.user
+        )
+
+        p1.save()
+        messages.add_message(request, constants.SUCCESS, 'Paciente cadastrado com sucesso.')
+        return redirect('/pacientes/')
+
+    except:
+        messages.add_message(request, constants.ERROR, 'Erro interno no sistema.')
+        
+    
